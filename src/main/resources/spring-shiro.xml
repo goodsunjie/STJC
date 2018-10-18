@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!--第一步：直接配置一个 securityManager -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<!--刚配置时，先把这条注释掉，等后面写了MyRealm.java时，再把它的注释去掉，因为如果没有去掉就会在 tomcat开启时报一个错误 -->
+		<!--<property name="realm" ref="myRealm" /> -->
+	</bean>
+	
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+	<!-- 第三步：把请求路径拦截之后的处理 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!--shiro整个的处理，都由securityManger指定和决定 -->
+		<property name="securityManager" ref="securityManager" />
+		<!-- loginUrl==>如果登录成功，跳转到哪个页面，或者执行哪个请求 -->
+		<property name="loginUrl" value="/login.jsp" />
+		<!-- 验证通过执行的请求或者跳转 -->
+		<property name="successUrl" value="/home.jsp" />
+		<!-- 验证不通过执行的请求或者跳转 -->
+		<property name="unauthorizedUrl" value="/unauthorized.jsp" />
+		<!-- 具体的拦截路径和拦截的方式和角色和权限的范围 -->
+		<property name="filterChainDefinitions">
+			<value>
+			</value>
+		</property>
+	</bean>
+	
+	 <!-- AOP式方法级权限检查  -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+        <property name="proxyTargetClass" value="true" />
+    </bean>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+</beans>  
