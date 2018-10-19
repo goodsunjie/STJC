@@ -8,5 +8,8 @@ public interface DataServiceI {
 	
 	List<DicZhibiao> getDzb();
 	
+	String getNameById(String id);
+	
+	List<DicZhibiao> getRecordById(String id);
 	
 }
