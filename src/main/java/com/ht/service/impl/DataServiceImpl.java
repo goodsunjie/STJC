@@ -37,7 +37,6 @@ public class DataServiceImpl implements DataServiceI {
 		} else {
 			return "无";
 		}
-
 	}
 
 	@Override
