@@ -27,8 +27,8 @@ public class SwaggerConfig {
     }
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("生态环境监测平台接口文档")
-                .description("生态环境监测平台接口测试")
+                .title("平台接口文档")
+                .description("平台接口测试")
                 .version("1.0.0")
                 .termsOfServiceUrl("")
                 .license("")
