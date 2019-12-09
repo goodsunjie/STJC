@@ -21,7 +21,6 @@ public class DataServiceImpl implements DataServiceI {
 		com.ht.vo.DicZhibiaoExample.Criteria createCriteria = example.createCriteria();
 		createCriteria.andIdIsNotNull();
 		List<DicZhibiao> rootData = dicZhibiaoMapper.selectByExample(example);
-
 		return rootData;
 	}
 
