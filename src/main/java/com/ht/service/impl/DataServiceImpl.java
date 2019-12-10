@@ -47,5 +47,4 @@ public class DataServiceImpl implements DataServiceI {
 		List<DicZhibiao> data = dicZhibiaoMapper.selectByExample(example);
 		return data;
 	}
-
 }
